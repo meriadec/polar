@@ -1,4 +1,4 @@
-[Demo](polar.bangular.io)
+[Demo](http://polar.bangular.io)
 
 ## Install
 
