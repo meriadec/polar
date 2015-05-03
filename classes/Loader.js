@@ -1,6 +1,5 @@
 import Util from './Util.js';
 
-var _ = require('lodash');
 var q = require('q');
 var async = require('async');
 

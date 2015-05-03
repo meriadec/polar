@@ -1,0 +1,20 @@
+{
+  "bitwise": true,
+  "eqeqeq": true,
+  "forin": true,
+  "freeze": true,
+  "latedef": true,
+  "laxbreak": true,
+  "maxdepth": 3,
+  "nonbsp": true,
+  "nonew": false,
+  "undef": true,
+  "unused": true,
+  "browser": true,
+  "node": true,
+  "globals": [
+    "TweenMax",
+    "Back",
+    "Power4"
+  ]
+}
