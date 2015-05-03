@@ -6,8 +6,12 @@ class Story {
     this.player = player;
     this.boards = [];
     this.i = 0;
+    this.totalCells = 0;
+    this.finish = story.finish || null;
     story.boards.forEach(board => {
-      this.boards.push(new Board(board, player));
+      var b = new Board(board, player);
+      this.totalCells += b.totalCells();
+      this.boards.push(b);
     });
   }
 
@@ -22,7 +26,12 @@ class Story {
     if (!this.boards[this.i].showCell(reconstructBoard, cb)) {
 
       // last board
-      if (this.i >= this.boards.length - 1) { return; }
+      if (this.i >= this.boards.length - 1) {
+        if (this.finish) {
+          this.player.play(this.finish, true);
+        }
+        return;
+      }
 
       this.player.clear();
       ++self.i;
@@ -30,6 +39,18 @@ class Story {
       self.player.status.cell = 0;
       self.showCell(false, cb);
     }
+  }
+
+  currentBoard () {
+    return this.boards[this.i];
+  }
+
+  percentage () {
+    var showedCells = 0;
+    this.boards.forEach(b => {
+      showedCells += b.showedCells();
+    });
+    return showedCells / this.totalCells;
   }
 
 }

@@ -14,5 +14,5 @@ import Player from './classes/Player.js';
 var polar = new Player(require('./scenario'));
 
 polar.load(function () {
-  polar.play('third');
+  polar.play('main');
 });

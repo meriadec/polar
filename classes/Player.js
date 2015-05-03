@@ -23,19 +23,23 @@ class Player {
       self.statusStoryEl = Util.createEl('div', 'status-story', self.statusEl);
       self.statusBoardEl = Util.createEl('div', 'status-board', self.statusEl);
       self.statusCellEl = Util.createEl('div', 'status-cell', self.statusEl);
-      document.addEventListener('click', self.showCell.bind(self));
+      self.statusBarlEl = Util.createEl('div', 'status-bar');
+      TweenMax.set(self.statusBarlEl, { scaleX: 0 });
+      document.body.appendChild(self.statusBarlEl);
+      document.addEventListener('click', function () { self.showCell(); });
       done();
     });
   }
 
   play (storyName, reconstructBoard) {
-    this.clear();
     this.curStory = this.stories[storyName];
+    this.clear();
     this.status.story = storyName;
     this.showCell(!!reconstructBoard);
   }
 
   clear () {
+    this.currentStory().currentBoard().clearListeners();
     while (this.screenEl.firstChild) {
       this.screenEl.removeChild(this.screenEl.firstChild);
     }
@@ -52,6 +56,11 @@ class Player {
     this.statusStoryEl.innerHTML = 'story: ' + this.status.story;
     this.statusBoardEl.innerHTML = 'board: ' + this.status.board;
     this.statusCellEl.innerHTML = 'cell: ' + this.status.cell;
+    TweenMax.to(this.statusBarlEl, 0.5, { scaleX: this.curStory.percentage(), ease: Back.easeOut.config(0.7) });
+  }
+
+  currentStory () {
+    return this.curStory;
   }
 
 }

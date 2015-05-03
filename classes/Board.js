@@ -12,6 +12,7 @@ class Board {
   }
 
   showCell (reconstructBoard, cb) {
+    if (reconstructBoard && this.i > 0) { --this.i; }
     if (this.i >= this.cells.length) { return false; }
     this.player.status.cell = this.i;
     if (reconstructBoard) {
@@ -21,6 +22,24 @@ class Board {
     cb();
     this.i++;
     return true;
+  }
+
+  clearListeners () {
+    this.cells.forEach(c => {
+      c.clearListeners();
+    });
+  }
+
+  totalCells () {
+    return this.cells.length;
+  }
+
+  showedCells () {
+    var nb = 0;
+    this.cells.forEach(c => {
+      if (c.showed) { ++nb; }
+    });
+    return nb;
   }
 
 }

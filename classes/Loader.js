@@ -37,7 +37,7 @@ class Loader {
       img.src = src;
       img.onload = function () {
         self.percent.innerHTML = Math.round((++nb / self.assets.length) * 100);
-        setTimeout(done, 500);
+        done();
       };
       img.onerror = function (err) { done(err); };
     }, function (err) {

@@ -1,5 +1,6 @@
 module.exports = {
   main: {
+    finish: 'end',
     boards: [
       {
         cells: [
@@ -17,12 +18,13 @@ module.exports = {
     ]
   },
   secondary: {
+    finish: 'main',
     boards: [
       {
         cells: [
           { src: 'limace_1.jpg', x: 0, y: 0, points: [{ x: 100, y: 100, story: 'main' }] },
           { src: 'limace_2.jpeg', x: 620, y: 620, points: [{ x: 40, y: 40, story: 'third' }, { x: 240, y: 140, story: 'third' }] },
-          { src: 'limace_1.jpg', x: 100, y: 2000, points: [{ x: 100, y: 100, story: 'main' }] }
+          { src: 'limace_1.jpg', x: 100, y: 1000, points: [{ x: 100, y: 100, story: 'main' }] }
         ]
       },
       {
@@ -34,6 +36,7 @@ module.exports = {
     ]
   },
   third: {
+    finish: 'secondary',
     boards: [
       {
         cells: [
@@ -45,6 +48,15 @@ module.exports = {
         cells: [
           { x: 0, y: 0, src: 'chamane_3.jpeg', points: [{ x: 10, y: 10, story: 'main' }] },
           { x: 300, y: 0, src: 'chamane_4.jpg' }
+        ]
+      }
+    ]
+  },
+  end: {
+    boards: [
+      {
+        cells : [
+          { x: 0, y: 0, src: 'end.jpg' }
         ]
       }
     ]

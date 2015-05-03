@@ -27,20 +27,46 @@ class Cell {
 
   show () {
     var self = this;
+
     this.player.screenEl.appendChild(this.el);
+
     TweenMax.to(this.el, 0.25, { opacity: 1, scale: 1 });
     TweenMax.to(window, 2, {scrollTo:{y:this.y, x:0}, ease:Power4.easeOut});
+
+    this.showed = true;
+
     if (this.points) {
+
       this.points.forEach(p => {
+
+        // append to image
         this.player.screenEl.appendChild(p.el);
-        p.el.addEventListener('click', function (e) {
+
+        // create listeners
+
+        p.onClick = function (e) {
           e.stopPropagation();
-          console.log('changing story to ' + p.story);
           self.player.play(p.story, true);
-        });
+        };
+
+        // add them to point
+
+        p.el.addEventListener('click', p.onClick);
+
+        // anim point
+
         setTimeout(function () {
           TweenMax.to(p.el, 0.25, { opacity: 1, scale: 1, ease: Back.easeOut.config(3) });
         }, 250);
+
+      });
+    }
+  }
+
+  clearListeners () {
+    if (this.points) {
+      this.points.forEach(p => {
+        p.el.removeEventListener('click', p.onClick);
       });
     }
   }
