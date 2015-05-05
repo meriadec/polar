@@ -1,7 +1,6 @@
 import Util from './Util.js';
 
 var q = require('q');
-var async = require('async');
 
 class Loader {
 
@@ -27,22 +26,21 @@ class Loader {
   }
 
   loadAll () {
-    var self = this;
     var def = q.defer();
     this.showLoader();
     var nb = 0;
-    async.map(this.assets, function (src, done) {
+    var total = this.assets.length;
+    this.assets.forEach(src => {
       var img = new Image();
       img.src = src;
-      img.onload = function () {
-        self.percent.innerHTML = Math.round((++nb / self.assets.length) * 100);
-        done();
+      img.onload = () => {
+        this.percent.innerHTML = Math.round((++nb / this.assets.length) * 100);
+        if (nb === total) {
+          this.hideLoader();
+          def.resolve();
+        }
       };
-      img.onerror = function (err) { done(err); };
-    }, function (err) {
-      if (err) { return def.reject(err); }
-      self.hideLoader();
-      def.resolve();
+      img.onerror = function (err) { def.reject(err); };
     });
     return def.promise;
   }
