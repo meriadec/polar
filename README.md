@@ -5,7 +5,7 @@
 Requirements:
 
 ```
-sudo npm install -g webpack webpack-dev-server
+npm install -g webpack webpack-dev-server
 ```
 
 Launch:
