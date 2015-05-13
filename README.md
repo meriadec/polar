@@ -4,9 +4,14 @@
 
 Requirements:
 
-- [webpack](https://github.com/webpack/webpack)
+```
+npm install -g webpack webpack-dev-server
+```
+
+Launch:
 
 ```
 npm install
-webpack
+webpack-dev-server
+go to http://localhost:8080/webpack-dev-server/bundle
 ```

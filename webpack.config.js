@@ -1,5 +1,3 @@
-var webpack = require('webpack');
-
 module.exports = {
 
   entry   : './app.js',
@@ -9,10 +7,21 @@ module.exports = {
   },
 
   module : {
+    preLoaders : [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'jshint-loader'
+      }
+    ],
     loaders : [
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
       { test: /\.css/, exclude: /node_modules/, loader: 'style-loader!css-loader!autoprefixer-loader' }
     ]
+  },
+
+  jshint : {
+    esnext: true
   }
 
 };

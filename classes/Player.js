@@ -1,5 +1,3 @@
-var _ = require('lodash');
-
 import Util from './Util.js';
 import Loader from './Loader.js';
 import Story from './Story.js';
