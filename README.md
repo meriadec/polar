@@ -12,5 +12,6 @@ Launch:
 
 ```
 npm install
-webpack
+webpack-dev-server
+go to http://localhost:8080/webpack-dev-server/bundle
 ```
