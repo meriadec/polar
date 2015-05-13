@@ -4,9 +4,9 @@ module.exports = {
     boards: [
       {
         cells: [
-          { src: 'chat_1.jpg', x: 0, y: 0, points: [{ x: 40, y: 40, story: 'secondary' }] },
-          { src: 'chat_2.jpg', x: 620, y: 0 },
-          { src: 'chat_3.jpg', x: 620, y: 370 }
+          { src: 'P1case1.gif', x: 0, y: 0, points: [{ x: 40, y: 40, story: 'secondary' }] },
+          { src: 'P1case2.gif', x: 620, y: 0 },
+          { src: 'P1case2.gif', x: 620, y: 370 }
         ]
       },
       {
