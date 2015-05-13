@@ -4,7 +4,11 @@
 
 Requirements:
 
-- [webpack](https://github.com/webpack/webpack)
+```
+sudo npm install -g webpack webpack-dev-server
+```
+
+Launch:
 
 ```
 npm install
