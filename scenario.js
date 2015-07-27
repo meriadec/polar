@@ -4,50 +4,47 @@ module.exports = {
     boards: [
       {
         cells: [
-          { src: 'P1case1.gif', x: 0, y: 0, points: [{ x: 40, y: 40, story: 'secondary' }] },
-          { src: 'P1case2.gif', x: 620, y: 0 },
-          { src: 'P1case2.gif', x: 620, y: 370 }
+          { src: 'S1case1.gif', x: 0, y: 0 },
         ]
       },
       {
         cells: [
-          { src: 'chat_4.jpg', x: 0, y: 0, points: [{ x: 40, y: 40, story: 'secondary' }] },
-          { src: 'chat_5.jpg', x: 0, y: 640 }
+          { src: 'S1case2 v2.gif', x: 0, y: 0 },
+        ]
+      },
+      {
+        cells: [
+          { src: 'S1case3.jpg', x: 0, y: 0 },
+        ]
+      },
+      {
+        cells: [
+          { src: 'S1case4.gif', x: 0, y: 0, points: [{ x: 350, y: 480, story: 'cadavreTete' },{ x: 600, y: 550, story: 'symbole' }]  },
+        ]
+      },
+      {
+        cells: [
+          { src: 'S1case7.jpg', x: 0, y: 0, points: [{ x: 496, y: 601, story: 'cadavreTete' }]  },
         ]
       }
     ]
   },
-  secondary: {
+  cadavreTete: {
     finish: 'main',
     boards: [
       {
         cells: [
-          { src: 'limace_1.jpg', x: 0, y: 0, points: [{ x: 100, y: 100, story: 'main' }] },
-          { src: 'limace_2.jpeg', x: 620, y: 620, points: [{ x: 40, y: 40, story: 'third' }, { x: 240, y: 140, story: 'third' }] },
-          { src: 'limace_1.jpg', x: 100, y: 1000, points: [{ x: 100, y: 100, story: 'main' }] }
-        ]
-      },
-      {
-        cells: [
-          { src: 'limace_3.jpg', x: 0, y: 0 },
-          { src: 'limace_4.jpg', x: 0, y: 690, point: [{ x: 100, y: 100, story: 'main' }] }
+          { src: 'S1case5a.jpg', x: 0, y: 0 }
         ]
       }
     ]
   },
-  third: {
-    finish: 'secondary',
+  symbole: {
+    finish: 'main',
     boards: [
       {
         cells: [
-          { x: 60, y: 80, src: 'chamane_1.jpeg', points: [{ x: 10, y: 10, story: 'main' }] },
-          { x: 460, y: 80, src: 'chamane_2.jpg' }
-        ]
-      },
-      {
-        cells: [
-          { x: 0, y: 0, src: 'chamane_3.jpeg', points: [{ x: 10, y: 10, story: 'main' }] },
-          { x: 300, y: 0, src: 'chamane_4.jpg' }
+          { x: 0, y: 0, src: 'S1case6a.jpg' }
         ]
       }
     ]
@@ -56,7 +53,7 @@ module.exports = {
     boards: [
       {
         cells : [
-          { x: 0, y: 0, src: 'end.jpg' }
+          { x: 0, y: 0, src: 'uuuuh.jpg' }
         ]
       }
     ]
