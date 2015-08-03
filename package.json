@@ -4,7 +4,8 @@
   "description": "",
   "author": "meriadec <meriadec.pillet@gmail.com>",
   "scripts": {
-    "start": "webpack-dev-server --devtool eval-source --progress --colors --hot --inline --history-api-fallback"
+    "start": "webpack-dev-server --devtool eval-source --progress --colors --hot --inline --history-api-fallback",
+    "build": "webpack --config webpack.config.build.js --progress --colors"
   },
   "license": "BSD",
   "devDependencies": {
