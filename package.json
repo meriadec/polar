@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "",
   "author": "meriadec <meriadec.pillet@gmail.com>",
+  "scripts": {
+    "start": "webpack-dev-server --devtool eval-source --progress --colors --hot --inline --history-api-fallback"
+  },
   "license": "BSD",
   "devDependencies": {
     "autoprefixer-loader": "^1.2.0",
