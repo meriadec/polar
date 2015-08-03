@@ -1,6 +1,7 @@
 import Util from './Util.js';
 
 var q = require('q');
+var spinnerSrc = 'ui/loading-spinner-resized.png';
 
 class Loader {
 
@@ -10,8 +11,10 @@ class Loader {
 
     self.loader = Util.createEl('div', 'loader');
     self.content = Util.createEl('div', 'content');
-    self.spinner = Util.createEl('div', 'spinner');
-    self.percent = Util.createEl('span', 'percent');
+    self.spinner = Util.createEl('img', 'loading-spinner');
+    self.percent = Util.createEl('span', 'loading-percent');
+
+    self.spinner.src = spinnerSrc;
 
     self.assets = [];
 
@@ -34,7 +37,7 @@ class Loader {
       var img = new Image();
       img.src = src;
       img.onload = () => {
-        this.percent.innerHTML = Math.round((++nb / this.assets.length) * 100);
+        this.percent.innerHTML = Math.round((++nb / this.assets.length) * 100) + ' %';
         if (nb === total) {
           this.hideLoader();
           def.resolve();
@@ -46,11 +49,19 @@ class Loader {
   }
 
   showLoader () {
-    this.content.innerHTML = 'Loading...';
+    this.percent.innerHTML = '0 %';
     this.content.appendChild(this.percent);
+    this.spinner.style.opacity = 0;
     this.content.appendChild(this.spinner);
     this.loader.appendChild(this.content);
     document.body.appendChild(this.loader);
+
+    // load spinner image then show it
+    var spin = new Image();
+    spin.src = spinnerSrc;
+    spin.onload = () => {
+      TweenMax.to(this.spinner, 0.25, { opacity: 1 });
+    };
   }
 
   hideLoader () {

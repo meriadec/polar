@@ -23,10 +23,6 @@ body {
   overflow-x: hidden;
 }
 
-img {
-  margin-bottom: 100px;
-}
-
 .cell {
   position: absolute;
   top: 0;
@@ -77,4 +73,27 @@ img {
   top: 0;
   width: 100%;
   transform-origin: left center;
+}
+
+.loading-percent {
+  display: block;
+  font-weight: bold;
+  transform: translateY(58px);
+}
+
+.loading-spinner {
+  animation: rotating 4s linear infinite;
+  display: block;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
