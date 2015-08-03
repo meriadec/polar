@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import Util from './Util.js';
 import Loader from './Loader.js';
 import Story from './Story.js';
@@ -11,16 +12,24 @@ class Player {
     Object.keys(scenario).forEach(story => {
       this.stories[story] = new Story(scenario[story], this);
     });
+
+    // resize all on window resize
+    window.addEventListener('resize', _.debounce(this.resize.bind(this), 250));
+
   }
 
   load (done) {
     var self = this;
-    new Loader(this.scenario).loadAll().then(function () {
+    new Loader(this.scenario).loadAll().then(() => {
       self.screenEl = Util.createEl('div', 'screen', document.body);
       self.statusBarlEl = Util.createEl('div', 'status-bar');
       TweenMax.set(self.statusBarlEl, { scaleX: 0 });
       document.body.appendChild(self.statusBarlEl);
       document.addEventListener('click', function () { self.showCell(); });
+
+      // init resize of all boards
+      this.resize();
+
       done();
     });
   }
@@ -37,6 +46,10 @@ class Player {
     while (this.screenEl.firstChild) {
       this.screenEl.removeChild(this.screenEl.firstChild);
     }
+  }
+
+  resize () {
+    _.forEach(this.stories, story => story.resize());
   }
 
   showCell (reconstructBoard) {

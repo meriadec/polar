@@ -1,4 +1,5 @@
 import Board from './Board.js';
+import _ from 'lodash';
 
 class Story {
 
@@ -51,6 +52,10 @@ class Story {
       showedCells += b.showedCells();
     });
     return showedCells / this.totalCells;
+  }
+
+  resize () {
+    _.forEach(this.boards, board => board.resize());
   }
 
 }

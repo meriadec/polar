@@ -16,6 +16,7 @@ body::-webkit-scrollbar-thumb {
 *, *:after, *:before { box-sizing: border-box; }
 
 body {
+  padding-top: 100px;
   margin: 0;
   background: rgb(00, 00, 00);
   position: relative;
@@ -27,6 +28,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  transform-origin: top left;
 }
 
 .screen {

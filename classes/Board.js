@@ -1,14 +1,22 @@
 import Cell from './Cell.js';
+import _ from 'lodash';
 
 class Board {
 
   constructor (board, player) {
+
+    // default values, will be changed by resize
+    this.x = 0;
+    this.y = 0;
+    this.scale = 1;
+
     this.player = player;
     this.cells = [];
     this.i = 0;
     board.cells.forEach(cell => {
-      this.cells.push(new Cell(cell, player));
+      this.cells.push(new Cell(cell, player, this));
     });
+
   }
 
   showCell (reconstructBoard, cb) {
@@ -40,6 +48,26 @@ class Board {
       if (c.showed) { ++nb; }
     });
     return nb;
+  }
+
+  resize () {
+    var maxW = window.innerWidth - 40;
+    var boardW = _.max(this.cells.map(c => c.el.width));
+
+    // if board is too small, reduce it
+    if (boardW > maxW) {
+      this.scale = maxW / boardW;
+      this.x = 0;
+      this.y = 0;
+      _.forEach(this.cells, c => c.reScale());
+    }
+
+    // else, place it center
+    else {
+      this.scale = 1;
+      this.x = (maxW - boardW) / 2;
+      _.forEach(this.cells, c => c.rePosition());
+    }
   }
 
 }

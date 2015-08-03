@@ -7,14 +7,15 @@ var _ = require('lodash');
  */
 class Cell {
 
-  constructor (data, player) {
+  constructor (data, player, board) {
     this.points = null;
+    this.board = board;
     _.extend(this, data);
     this.player = player;
     this.el = document.createElement('img');
     this.el.classList.add('cell');
     this.el.src = 'img/' + this.src;
-    TweenMax.set(this.el, { x: this.x, y: this.y, opacity: 0, scale: 1.1 });
+    TweenMax.set(this.el, { x: this.x + this.board.x, y: this.y + this.board.y, opacity: 0 });
 
     // action points
     if (this.points) {
@@ -30,7 +31,7 @@ class Cell {
 
     this.player.screenEl.appendChild(this.el);
 
-    TweenMax.to(this.el, 0.25, { opacity: 1, scale: 1 });
+    TweenMax.to(this.el, 0.25, { opacity: 1 });
     TweenMax.to(window, 2, {scrollTo:{y:this.y, x:0}, ease:Power4.easeOut});
 
     this.showed = true;
@@ -67,6 +68,27 @@ class Cell {
     if (this.points) {
       this.points.forEach(p => {
         p.el.removeEventListener('click', p.onClick);
+      });
+    }
+  }
+
+  reScale () {
+    TweenMax.set(this.el, { scale: this.board.scale });
+    this.placePoints();
+  }
+
+  rePosition () {
+    TweenMax.set(this.el, { scale: 1, x: this.x + this.board.x, y: this.y + this.board.y });
+    this.placePoints();
+  }
+
+  placePoints () {
+    if (this.points) {
+      this.points.forEach(p => {
+        TweenMax.set(p.el, {
+          x: (this.x + p.x) * this.board.scale + this.board.x,
+          y: (this.y + p.y) * this.board.scale + this.board.y
+        });
       });
     }
   }
