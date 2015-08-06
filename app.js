@@ -1,18 +1,15 @@
-// styles
+import './style.css';
+import 'gsap';
 
-require('./style.css');
+import scenario from './scenario';
+import Loader from './components/Loader';
 
-// gsap globals... this is ugly :
+var loader = new Loader();
 
-require('gsap');
-require('./node_modules/gsap/src/minified/plugins/ScrollToPlugin.min');
-
-// core
-
-import Player from './classes/Player.js';
-
-var polar = new Player(require('./scenario'));
-
-polar.load(function () {
-  polar.play('main');
-});
+loader.loadScenario(scenario);
+loader.showSpinnerFor('main');
+loader.whenLoaded('main')
+  .then(loader.hideSpinner.bind(loader))
+  .then(function () {
+    console.log('we are ready');
+  });

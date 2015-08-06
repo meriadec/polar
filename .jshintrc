@@ -3,7 +3,6 @@
   "eqeqeq": true,
   "forin": true,
   "freeze": true,
-  "latedef": true,
   "laxbreak": true,
   "maxdepth": 3,
   "nonbsp": true,
@@ -14,6 +13,7 @@
   "node": true,
   "globals": [
     "TweenMax",
+    "TimelineMax",
     "Back",
     "Power4"
   ]
