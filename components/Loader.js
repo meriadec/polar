@@ -45,7 +45,7 @@ export default class Loader {
    */
   loadScenario (scenario) {
     _.forEach(scenario, (story, storyName) => {
-      this.promises[storyName] = createStoryLoader(story, storyName);
+      this.promises[storyName] = createStoryLoader(story);
     });
   }
 
@@ -60,13 +60,10 @@ export default class Loader {
    */
   showSpinnerFor (storyName) {
 
-    console.debug('>> Showing spinner for [' + storyName + ']');
-
     return q.Promise((resolve, reject) => {
 
       // check if story is already loaded
       if (this.promises[storyName].percent === 100) {
-        console.debug('>> Story [' + storyName + '] is already loaded');
         return resolve();
       }
 
@@ -117,7 +114,7 @@ export default class Loader {
     return q.Promise((resolve) => {
       this.story = null;
       new TimelineMax()
-        .to(this.loaderContainer, 1, { opacity: 0, scale: 0.8 })
+        .to(this.loaderContainer, 0.5, { opacity: 0, scale: 0.8 })
         .addCallback(() => {
           document.body.removeChild(this.loaderContainer);
           resolve();
@@ -127,7 +124,7 @@ export default class Loader {
 
 }
 
-function createStoryLoader (story, storyName) {
+function createStoryLoader (story) {
   var storyLoader = {
     total: story.cells.length,
     loaded: 0,
@@ -140,9 +137,6 @@ function createStoryLoader (story, storyName) {
         img.onload = () => {
           ++storyLoader.loaded;
           storyLoader.percent = Math.round((storyLoader.loaded / storyLoader.total) * 100);
-          if (storyLoader.percent === 100) {
-            console.log('>> story ' + storyName + ' loaded');
-          }
           resolve();
         };
       });

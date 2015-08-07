@@ -15,6 +15,10 @@ body::-webkit-scrollbar-thumb {
 
 *, *:after, *:before { box-sizing: border-box; }
 
+html, body {
+  height: 100%;
+}
+
 body {
   padding-top: 100px;
   margin: 0;
@@ -22,13 +26,6 @@ body {
   position: relative;
   font-family: 'Lato', sans-serif;
   overflow-x: hidden;
-}
-
-.cell {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform-origin: top left;
 }
 
 .screen {
@@ -68,13 +65,21 @@ body {
   background: rgba(0, 0, 0, .4);
 }
 
-.status-bar {
-  height: 3px;
-  background: rgba(255, 255, 255, 0.5);
-  position: fixed;
+.view {
+  position: absolute;
   top: 0;
-  width: 100%;
-  transform-origin: left center;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.cell {
+  display: block;
 }
 
 .loading-percent {
