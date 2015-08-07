@@ -6,10 +6,15 @@ import Loader from './components/Loader';
 
 var loader = new Loader();
 
+// load global scenario
 loader.loadScenario(scenario);
-loader.showSpinnerFor('main');
-loader.whenLoaded('main')
-  .then(loader.hideSpinner.bind(loader))
-  .then(function () {
-    console.log('we are ready');
+
+// show spinner for first story
+loader.showSpinnerFor('cadavreTete')
+  .then(() => {
+    console.debug('>> [cadavretete] is ready');
+    loader.showSpinnerFor('main')
+      .then(() => {
+        console.debug('>> [main] is ready');
+      });
   });

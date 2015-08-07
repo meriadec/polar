@@ -60,38 +60,68 @@ export default class Loader {
    */
   showSpinnerFor (storyName) {
 
-    // keep a ref into current showed story
-    this.story = this.promises[storyName];
+    console.debug('>> Showing spinner for [' + storyName + ']');
 
-    // hide spinner
-    this.loaderSpinner.style.opacity = 0;
+    return q.Promise((resolve, reject) => {
 
-    // put loader into page
-    document.body.appendChild(this.loaderContainer);
+      // check if story is already loaded
+      if (this.promises[storyName].percent === 100) {
+        console.debug('>> Story [' + storyName + '] is already loaded');
+        return resolve();
+      }
 
-    // wait for spinner loaded
-    this.spinnerImageLoaded.then(() => {
-      TweenMax.to(this.loaderSpinner, 0.5, { opacity: 1 });
+      // keep a ref into current showed story
+      this.story = this.promises[storyName];
+
+      // make loader opacity 1
+      TweenMax.set(this.loaderContainer, { opacity: 1, scale: 1 });
+
+      // make spinner transparent
+      TweenMax.set(this.loaderSpinner, { opacity: 1 });
+
+      // put loader into page
+      document.body.appendChild(this.loaderContainer);
+
+      // wait for spinner loaded
+      this.spinnerImageLoaded.then(() => {
+        TweenMax.to(this.loaderSpinner, 0.5, { opacity: 1 });
+      });
+
+      // animate percent
+      this.animatePercent();
+
+      // wait for story loaded
+      this.whenLoaded(storyName)
+        .then(this.hideSpinner.bind(this))
+        .then(resolve)
+        .catch(reject);
+
     });
-
-    // animate percent
-    this.animatePercent();
 
   }
 
+  /**
+   * Write percentage into loader
+   */
   animatePercent () {
     if (!this.story) { return; }
     this.loaderPercent.innerHTML = this.story.percent + '%';
     requestAnimationFrame(this.animatePercent.bind(this));
   }
 
+  /**
+   * Hide the spinner
+   */
   hideSpinner () {
     this.loaderPercent.innerHTML = '100%';
     return q.Promise((resolve) => {
       this.story = null;
       new TimelineMax()
         .to(this.loaderContainer, 1, { opacity: 0, scale: 0.8 })
-        .addCallback(resolve);
+        .addCallback(() => {
+          document.body.removeChild(this.loaderContainer);
+          resolve();
+        });
     });
   }
 
