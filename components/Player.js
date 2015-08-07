@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 import Story from './Story';
 import Loader from './Loader';
-import util from './utils';
+import utils from './utils';
 
 export default class Player {
 
@@ -15,14 +15,17 @@ export default class Player {
     this.busy = false;
 
     // create viewport
-    this.view = util.create('div', 'view', document.body);
+    let view = utils.create('div', 'view', document.body);
+
+    // create image
+    let img = utils.create('img', 'cell', view);
 
     // create loader
     this.loader = new Loader();
     this.loader.loadScenario(scenario);
 
     // create stories
-    this.stories = _.mapValues(scenario, story => new Story(story, this.view));
+    this.stories = _.mapValues(scenario, story => new Story(story, img));
 
     // story currently showed
     this.story = null;
@@ -50,7 +53,7 @@ export default class Player {
     }, false);
 
     // navigate forward and backward through swipe
-    util.handleSwipe(this.next.bind(this), this.prev.bind(this));
+    utils.handleSwipe(this.next.bind(this), this.prev.bind(this));
 
   }
 
