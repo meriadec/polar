@@ -86,13 +86,13 @@ export default class Loader {
   }
 
   hideSpinner () {
-    this.story = null;
-    new TimelineMax()
-      .to(this.loaderPercent, 0.5, { opacity: 0 })
-      .to(this.loaderContainer, 1, { opacity: 0, scale: 0.8 })
-      .addCallback(function () {
-        console.log('hided');
-      });
+    this.loaderPercent.innerHTML = '100%';
+    return q.Promise((resolve) => {
+      this.story = null;
+      new TimelineMax()
+        .to(this.loaderContainer, 1, { opacity: 0, scale: 0.8 })
+        .addCallback(resolve);
+    });
   }
 
 }
