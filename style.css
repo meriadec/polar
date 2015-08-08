@@ -28,13 +28,6 @@ body {
   overflow-x: hidden;
 }
 
-.screen {
-  position: relative;
-  margin: 1em;
-  padding-bottom: 1em;
-  z-index: 0;
-}
-
 .loader {
   position: fixed;
   top: 0;
