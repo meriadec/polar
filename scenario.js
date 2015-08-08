@@ -30,6 +30,7 @@ module.exports = {
     ]
   },
   cadavreTete: {
+    finish: 'main',
     cells: [
       { src: 'S1case5a.jpg' }
     ]
