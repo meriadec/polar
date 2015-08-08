@@ -14,13 +14,22 @@ module.exports = {
       {
         src: 'S1case7.jpg',
         points: [
-          { x: 496, y: 601, story: 'cadavreTete' }
+          { x: 496, y: 601, story: 'suite1' }
         ]
       }
     ]
   },
+  suite1: {
+
+    cells: [
+      { src: 'S1case8a.jpg' },
+      { src: 'S1case8b.jpg' },
+      { src: 'S1case9.jpg' },
+      { src: 'S1case10.gif' },
+      { src: 'S1case11.gif' }
+    ]
+  },
   cadavreTete: {
-    finish: 'main',
     cells: [
       { src: 'S1case5a.jpg' }
     ]
