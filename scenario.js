@@ -30,10 +30,5 @@ module.exports = {
     cells: [
       { src: 'S1case6a.jpg' }
     ]
-  },
-  end: {
-    cells: [
-      { src: 'uuuuh.jpg' }
-    ]
   }
 };
