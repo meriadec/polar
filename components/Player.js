@@ -25,7 +25,7 @@ export default class Player {
     this.loader.loadScenario(scenario);
 
     // create stories
-    this.stories = _.mapValues(scenario, story => new Story(story, img));
+    this.stories = _.mapValues(scenario, story => new Story(story, view, img));
 
     // story currently showed
     this.story = null;
@@ -58,7 +58,8 @@ export default class Player {
   }
 
   resize () {
-    this.story.resize();
+    this.story.resize()
+      .then(this.story.replacePoints.bind(this.story));
   }
 
   prev () {
@@ -104,6 +105,9 @@ export default class Player {
     return q.Promise((resolve, reject) => {
       this.busy = true;
       this.loader.showSpinnerFor(storyName)
+        .then(() => {
+          if (this.story) { return this.story.hide(); }
+        })
         .then(() => {
           this.story = this.stories[storyName];
           return this.show();
