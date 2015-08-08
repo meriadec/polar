@@ -95,7 +95,6 @@ export default class Story {
   }
 
   removePoint (point, id) {
-    console.log('remove listener');
     point.removeEventListener('click', this.eventListeners[id]);
     return q.Promise((resolve) => {
       new TimelineMax()

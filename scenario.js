@@ -1,8 +1,7 @@
 module.exports = {
   main: {
-    finish: 'end',
     cells: [
-      { src: 'S1case1.gif', points: [{ x: 100, y: 100, story: 'end' }] },
+      { src: 'S1case1.gif' },
       { src: 'S1case2 v2.gif' },
       { src: 'S1case3.jpg' },
       {

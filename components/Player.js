@@ -27,7 +27,7 @@ export default class Player {
     // create stories
     this.stories = _.mapValues(
       scenario,
-      story => new Story(story, view, img, { onPointClick: this.onPointClick })
+      story => new Story(story, view, img, { onPointClick: this.onPointClick.bind(this) })
     );
 
     // story currently showed
@@ -39,8 +39,6 @@ export default class Player {
   }
 
   addEvents () {
-
-    console.debug('Add global listeners');
 
     // resize view on window resize
     window.addEventListener('resize', _.debounce(this.resize.bind(this), 100), false);
@@ -132,7 +130,8 @@ export default class Player {
   }
 
   onPointClick (p) {
-    console.log('PPPPPP>>>', p);
+    this.story.hide()
+      .then(this.load.bind(this, p.story));
   }
 
 }
