@@ -16,7 +16,7 @@ export default class Story {
 
   show () {
     return q.Promise((resolve) => {
-      TweenMax.set(this.img, { opacity: 0, width: 'auto', height: 'auto' });
+      TweenMax.set(this.img, { opacity: 0, scale: 1 });
       this.img.src = 'img/' + this.cells[this.index].src;
       this.imgSize = { w: this.img.width, h: this.img.height };
       this.resize(true);
@@ -59,39 +59,26 @@ export default class Story {
 
   resize (immediate) {
 
-    var final = {};
+    var scale;
 
     let maxW = window.innerWidth - window.innerWidth / 10;
     let maxH = window.innerHeight - window.innerHeight / 10;
-    let hCrop = Math.floor(this.imgSize.w - maxW);
-    let vCrop = Math.floor(this.imgSize.h - maxH);
 
     // screen is wide enough, back to original dimensions
-    if (hCrop < 0 && vCrop < 0) {
-      final.height = this.imgSize.h;
-      final.width = this.imgSize.w;
+    if (this.imgSize.w < maxW && this.imgSize.h < maxH) {
+      scale = 1;
     }
 
     else {
-      let hRatio = this.imgSize.h / maxH;
-      let vRatio = this.imgSize.w / maxW;
+      let hRatio = maxH / this.imgSize.h;
+      let vRatio = maxW / this.imgSize.w;
 
-      if (vRatio > hRatio) {
-        final.width = maxW + 'px';
-        final.height = 'auto';
-      }
-      else {
-        final.height = maxH + 'px';
-        final.width = 'auto';
-      }
+      if (vRatio > hRatio) { scale = hRatio; }
+      else { scale = vRatio; }
     }
 
-    if (immediate) {
-      this.img.style.width = final.width;
-      this.img.style.height = final.height;
-    } else {
-      TweenMax.to(this.img, 0.2, { width: final.width, height: final.height });
-    }
+    if (immediate) { TweenMax.set(this.img, { scale: scale }); }
+    else { TweenMax.to(this.img, 0.2, { scale: scale }); }
 
   }
 
