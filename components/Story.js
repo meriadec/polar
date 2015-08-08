@@ -5,12 +5,14 @@ import utils from './utils';
 
 export default class Story {
 
-  constructor (scenario, view, img) {
+  constructor (scenario, view, img, props) {
 
+    this.props = props;
     this.cells = scenario.cells;
     this.finish = scenario.finish;
     this.scale = 1;
     this.points = [];
+    this.eventListeners = [];
     this.view = view;
     this.img = img;
     this.imgSize = {};
@@ -59,6 +61,7 @@ export default class Story {
         y: rect.top + p.y * this.scale - 25
       });
 
+      this.eventListeners.push(this.createListener(point, p));
       this.points.push(point);
       this.view.appendChild(point);
 
@@ -69,19 +72,31 @@ export default class Story {
     });
   }
 
+  createListener (point, p) {
+    var handler = (e) => {
+      e.stopPropagation();
+      this.props.onPointClick(p);
+    };
+    point.addEventListener('click', handler, false);
+    return handler;
+  }
+
   removePoints () {
     return q.Promise((resolve) => {
       let points = this.points;
       if (!points || !points.length) { return resolve(); }
-      q.all(points.map(p => this.removePoint(p)))
+      q.all(points.map((p, id) => this.removePoint(p, id)))
         .then(() => {
+          this.eventListeners = [];
           this.points = [];
         })
         .then(resolve);
     });
   }
 
-  removePoint (point) {
+  removePoint (point, id) {
+    console.log('remove listener');
+    point.removeEventListener('click', this.eventListeners[id]);
     return q.Promise((resolve) => {
       new TimelineMax()
         .to(point, 0.1, { opacity: 0 })
