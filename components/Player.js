@@ -123,6 +123,7 @@ export default class Player {
   show () {
     return q.Promise((resolve, reject) => {
       this.story.show()
+        .then(this.story.resize.bind(this.story, true))
         .then(() => { this.busy = false; })
         .then(resolve)
         .catch(reject);
