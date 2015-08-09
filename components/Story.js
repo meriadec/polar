@@ -22,14 +22,12 @@ export default class Story {
 
   show () {
     return q.Promise((resolve) => {
-      TweenMax.set(this.img, { opacity: 0, scale: 1 });
+      TweenMax.set(this.img, { scale: 1 });
       this.img.src = 'img/' + this.cells[this.index].src;
       this.imgSize = { w: this.img.width, h: this.img.height };
       this.resize(true);
-      TweenMax.set(this.img, { opacity: 0 });
 
       new TimelineMax()
-        .to(this.img, 0.2, { opacity: 1 })
         .addCallback(() => {
           this.showPoints()
             .then(resolve);
@@ -111,7 +109,6 @@ export default class Story {
       this.removePoints()
         .then(() => {
           new TimelineMax()
-            .to(this.img, 0.2, { opacity: 0 })
             .addCallback(() => {
               this.img.src = '';
               resolve();
