@@ -24,6 +24,7 @@ module.exports = {
     cells: [
       { src: 'S1case8a.jpg' },
       { src: 'S1case8b.jpg' },
+      { src: 'S1case9v2.jpg' },
       { src: 'S1case9.jpg' },
       { src: 'S1case10.gif' },
       { src: 'S1case11.gif' },
