@@ -26,7 +26,11 @@ module.exports = {
       { src: 'S1case8b.jpg' },
       { src: 'S1case9.jpg' },
       { src: 'S1case10.gif' },
-      { src: 'S1case11.gif' }
+      { src: 'S1case11.gif' },
+      { src: 'ecran titre.jpg' },
+      { src: 'S2C1.gif' },
+      { src: 'S2C2.jpg' },
+      { src: 'S2C3.jpg' }
     ]
   },
   cadavreTete: {
