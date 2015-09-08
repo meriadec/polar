@@ -22,16 +22,21 @@ export default class Story {
 
   show () {
     return q.Promise((resolve) => {
-      TweenMax.set(this.img, { scale: 1 });
-      this.img.src = 'img/' + this.cells[this.index].src;
-      this.imgSize = { w: this.img.width, h: this.img.height };
-      this.resize(true);
 
-      new TimelineMax()
-        .addCallback(() => {
-          this.showPoints()
-            .then(resolve);
-        });
+      TweenMax.set(this.img, { scale: 1, opacity: 0 });
+      this.img.src = 'img/' + this.cells[this.index].src;
+
+      this.img.onload = () => {
+        this.imgSize = { w: this.img.width, h: this.img.height };
+        this.resize(true);
+
+        new TimelineMax()
+          .set(this.img, { opacity: 1 })
+          .addCallback(() => {
+            this.showPoints()
+              .then(resolve);
+          });
+      };
 
     });
   }
