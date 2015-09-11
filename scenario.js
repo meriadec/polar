@@ -14,7 +14,7 @@ module.exports = {
       {
         src: 'S1case7.jpg',
         points: [
-          { x: 496, y: 601, story: 'suite1' }
+          { x: 550, y: 645, story: 'suite1' }
         ]
       }
     ]
