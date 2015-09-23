@@ -47,7 +47,24 @@ module.exports = {
       { src: 'S2C13.jpg' },
       { src: 'S2C14.jpg' },
       { src: 'S2C15.jpg' },
-      { src: 'S2C16.jpg' }
+      { src: 'S2C16.jpg' },
+      { src: 'S2C17.jpg' },
+      { src: 'S2C18.jpg' },
+      { src: 'S2C19.jpg' },
+      { src: 'S2C20.jpg' },
+      { src: 'S2C21.jpg' },
+      { src: 'S2C22.jpg' },
+      { src: 'S2C23.jpg' },
+      { src: 'S2C24.jpg' },
+      { src: 'S3C1.jpg' },
+      { src: 'S3C3.jpg' },
+      { src: 'S3C4.jpg' },
+      { src: 'S3C5.jpg' },
+      { src: 'S3C6.jpg' },
+      { src: 'S3C7.jpg' },
+      { src: 'S3C8.jpg' },
+      { src: 'S3C9.jpg' },
+      { src: 'S3C10.jpg' }
     ]
   },
   cadavreTete: {
